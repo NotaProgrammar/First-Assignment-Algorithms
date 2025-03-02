@@ -10,11 +10,12 @@ public class Exercises {
     */
     public int[] productIndices(int[] values, int target) {
         int[] result = new int[2];
-        for(int i=0, j=0; i<values.length && target!=1; i++) {
-            if(target % values[i] == 0) {
-                result[j] = i;
-                j++;
-                target /= values[i];
+        for(int i=0, j=0; i<values.length; i++) {
+            for(int k=i+1; k<values.length; k++) {
+                if(values[i]*values[k] == target) {
+                    result[0] = i;
+                    result[1] = k;
+                }
             }
         }
         return result;
