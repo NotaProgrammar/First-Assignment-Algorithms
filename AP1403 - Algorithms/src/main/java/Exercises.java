@@ -9,8 +9,15 @@ public class Exercises {
         note: you should return the indices in ascending order and every array's solution is unique
     */
     public int[] productIndices(int[] values, int target) {
-        // todo
-        return null;
+        int[] result = new int[2];
+        for(int i=0, j=0; i<values.length && target!=1; i++) {
+            if(target % values[i] == 0) {
+                result[j] = i;
+                j++;
+                target /= values[i];
+            }
+        }
+        return result;
     }
 
     /*
