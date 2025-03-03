@@ -10,9 +10,9 @@ public class Exercises {
     */
     public int[] productIndices(int[] values, int target) {
         int[] result = new int[2];
-        for(int i=0, j=0; i<values.length; i++) {
-            for(int k=i+1; k<values.length; k++) {
-                if(values[i]*values[k] == target) {
+        for (int i = 0, j = 0; i < values.length; i++) {
+            for (int k = i + 1; k < values.length; k++) {
+                if (values[i] * values[k] == target) {
                     result[0] = i;
                     result[1] = k;
                 }
@@ -33,8 +33,42 @@ public class Exercises {
         so you should walk in that matrix in a curl and then add the numbers in order you've seen them in a 1D array
     */
     public int[] spiralTraversal(int[][] values, int rows, int cols) {
-        // todo
-        return null;
+        int[] result = new int[rows * cols];
+        int top = 0, bottom = rows - 1, left = 0, right = cols - 1,counter = 0;
+
+        while (top <= bottom && left <= right) {
+            // Traverse from left to right along the top row
+            for (int i = left; i <= right; i++) {
+                result[counter++] = values[top][i];
+            }
+            top++;
+
+            // Traverse from top to bottom along the right column
+            for (int i = top; i <= bottom; i++) {
+                result[counter++] = values[i][right];
+            }
+            right--;
+
+            // Traverse from right to left along the bottom row (if applicable)
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    result[counter++] = values[bottom][i];
+                }
+                bottom--;
+            }
+
+            // Traverse from bottom to top along the left column (if applicable)
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    result[counter++] = values[i][left];
+                }
+                left++;
+            }
+        }
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + " ");
+        }
+        return result;
     }
 
     /*
@@ -67,6 +101,5 @@ public class Exercises {
     }
 
     public static void main(String[] args) {
-        // you can test your code here
     }
 }
