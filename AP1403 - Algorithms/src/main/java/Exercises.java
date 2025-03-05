@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 public class Exercises {
 
     /*
@@ -96,10 +98,44 @@ public class Exercises {
         if you're familiar with lists and arraylists, you can also edit method's body to use them instead of array
     */
     public int[][] intPartitions(int n) {
-        // todo
-        return null;
+        List<List<Integer>> result = new ArrayList<>();
+        intPartionsHelper(n, n, new ArrayList<>(0), result);
+        int [][] ResultArray = new int[result.size()][];
+        for(int i=0; i<result.size(); i++) {
+            ResultArray[i] = new int[result.get(i).size()];
+            for(int j=0; j<result.get(i).size(); j++) {
+                ResultArray[i][j] = result.get(i).get(j);
+            }
+        }
+//        for(int i=0; i<result.size(); i++) {
+//            for(int j=0; j<result.get(i).size(); j++) {
+//                System.out.print(result.get(i).get(j) + " ");
+//            }
+//            System.out.println();
+//        }
+        return ResultArray;
+
+    }
+    public static void intPartionsHelper(int target, int max, List<Integer> row, List<List<Integer>> result)
+    {
+        if(target == 0)
+        {
+            result.add(new ArrayList<>(row));
+            return;
+        }
+        for(int i=Math.min(target, max); i>=1; i--)
+        {
+            row.add(i);
+            intPartionsHelper(target - i, i, row, result);
+            row.remove(row.size() - 1);
+        }
     }
 
+
+
     public static void main(String[] args) {
+        Exercises ex = new Exercises();
+        ex.intPartitions(3);
+
     }
 }
